@@ -61,29 +61,23 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\PexesoContent\bin\fonts\Arial20.xnb">
-      <Link>Content\fonts\Arial20.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="Content\fonts\Arial20.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\PexesoContent\bin\graphics\mageyebutton.xnb">
-      <Link>Content\graphics\mageyebutton.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="Content\graphics\mageyebutton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\PexesoContent\bin\graphics\pexesoBack.xnb">
-      <Link>Content\graphics\pexesoBack.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="Content\graphics\pexesoBack.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\PexesoContent\bin\graphics\pexesoTile.xnb">
-      <Link>Content\graphics\pexesoTile.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="Content\graphics\pexesoTile.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\PexesoContent\bin\graphics\playbutton.xnb">
-      <Link>Content\graphics\playbutton.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="Content\graphics\playbutton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\PexesoContent\bin\graphics\quitbutton.xnb">
-      <Link>Content\graphics\quitbutton.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="Content\graphics\quitbutton.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
