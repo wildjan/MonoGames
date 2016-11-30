@@ -72,7 +72,7 @@ namespace Pexeso
         #region Properties
 
         /// <summary>
-        /// Gets number of revealed cards
+        /// Gets number of temporary revealed cards
         /// </summary>
         public int NumRevealed
         {
@@ -84,13 +84,12 @@ namespace Pexeso
                     {
                         numRevealed++;
                     }
-
                 }
                 return numRevealed; }
         }
 
         /// <summary>
-        /// Gets number of turns
+        /// Gets total number of turns
         /// </summary>
         public int NumTurns
         {
@@ -142,14 +141,17 @@ namespace Pexeso
                     //  two card flipped
                     if (cardFlipped[0].Value != cardFlipped[1].Value)
                     {
-                        // cards are not the same
+                        // cards are not the same hide both of them
                         HideFlipped();
                     }
                     else
                     {
+                        // cardsTile are the same value so expose both of them permenently
                         cardFlipped[0].Reveal();
                         cardFlipped[1].Reveal();
                     }
+
+                    // empty list of the temporary revealed cards
                     cardFlipped.Clear();
                 }
                 else if (cardFlipped.Count == 1)
@@ -161,18 +163,19 @@ namespace Pexeso
                 card.FlipOver();
                 cardFlipped.Add(card);
             }
+
+            // check if the game is over
             if (NumRevealed + cardFlipped.Count == NUM_CARDS)
             {
-                Console.WriteLine(NumRevealed + cardFlipped.Count());
+                // remove flipped (revealed) cards and set game is over status
                 cardFlipped.Clear();
                 boardDone = true;
             }
             return boardDone;
-
         }
 
         /// <summary>
-        /// Draw cards and buttons
+        /// Draw cards
         /// </summary>
         /// <param name="location">the location at which to cut the deck</param>
         public void Draw(SpriteBatch spriteBatch)

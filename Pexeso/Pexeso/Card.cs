@@ -179,20 +179,28 @@ namespace Pexeso
         }
 
         /// <summary>
-        /// Draws card
+        /// Draws a card
         /// </summary>
         /// <param name="spriteBatch">the sprite batch to use</param>
         public void Draw(SpriteBatch spriteBatch)
         {
+            // if a card is exposed
             if (FaceUp)
             {
+                // draw an exposed card in the normal size
                 spriteBatch.Draw(cardsTile, drawBigRectangle, sourceCardRectangle, Color.White);
             }
+
+            // a card is not exposed
             else
             {
+                // draw a back side of the card
                 spriteBatch.Draw(cardDownSide, drawBigRectangle, sourceBackRectangle, Color.White);
+
+                // if s magic feature is on
                 if (magicEye)
                 {
+                    // draw a reduced card to the upper left corner of the back side of the card
                     spriteBatch.Draw(cardsTile, drawSmallRectangle, sourceCardRectangle, Color.White);
                 }
             }
@@ -202,21 +210,6 @@ namespace Pexeso
 
         #region Private methods
 
-        /// <summary>
-        /// Loads the content for card
-        /// </summary>
-        /// <param name="contentManager">the content manager to use</param>
-        /// <param name="spriteName">the name of the sprite tile for cards</param>
-        /// <param name="x">the x location of the center of the card</param>
-        /// <param name="y">the y location of the center of the card</param>
-        private void LoadContent(ContentManager contentManager)
-        {
-            // load content and set remainder of draw rectangle
-            //int x = value /
-
-            cardDownSide = contentManager.Load<Texture2D>(BACK_NAME);
-            cardsTile = contentManager.Load<Texture2D>(TILE_NAME);
-        }
         /// <summary>
         /// Sets the source rectangle location to correspond with the given frame
         /// </summary>
@@ -228,7 +221,7 @@ namespace Pexeso
             sourceCardRectangle.Y = ((value - 1) / TILE_COLS) * CARD_HEIGHT;
         }
         /// <summary>
-        /// Sets the draw rectangle location to correspond with the given card value
+        /// Sets draw rectangles locations to correspond with the given card value
         /// </summary>
         /// <param name="frameNumber">the frame number</param>
         private void SetDrawRectangleLocation(int position)

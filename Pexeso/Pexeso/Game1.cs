@@ -16,7 +16,6 @@ namespace Pexeso
         Board board;
 
         // scoring support
-        int score = 0;
         string scoreString = "Score: " + 0;
 
         // text display support
@@ -78,12 +77,11 @@ namespace Pexeso
             // initialize menu objects
             mainMenu = new Menu(Content, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
 
-            // TODO: use this.Content to load your game content here
-
-            // card tile and back
+             // load card tile and back
             cardDownSide = Content.Load<Texture2D>(@"graphics\pexesoBack");
             cardsTile = Content.Load<Texture2D>(@"graphics\pexesoTile");
 
+            // create board
             board = new Board(cardsTile, cardDownSide, graphics.PreferredBackBufferWidth,
                 graphics.PreferredBackBufferHeight);
             fontPos = new Vector2(100f, 100f);
@@ -108,19 +106,22 @@ namespace Pexeso
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-
             // process mouse based on game state
             MouseState mouse = Mouse.GetState();
             mainMenu.Update(mouse, gameRunning);
 
+            // if the game is running
             if (gameRunning)
             {
+                // and a magic eye feature is on
                 if (state == GameState.MagEye)
                 {
+                    // show reduced cards as hint
                     board.TurnMagic();
                     state = GameState.Running;
                 }
+
+                // test end of game
                 if (mouse.LeftButton == ButtonState.Pressed)
                 {
                     Card card = board.CardClicked(mouse);
@@ -130,14 +131,19 @@ namespace Pexeso
                     }
                 }
             }
+
+            // game is not running
             else
             {
+                // and button 'New game' is pressed initialize a new game
                 if (state == GameState.Play)
                 {
                     board.Initialize();
                     gameRunning = true;
                     state = GameState.Running;
                 }
+
+                // and button Quit is pressed initialize a new game
                 if (state == GameState.Quit)
                 {
                     this.Exit();
