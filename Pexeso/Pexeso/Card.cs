@@ -19,8 +19,6 @@ namespace Pexeso
         const int CARD_HEIGHT = 140;
         const int TILE_ROWS = 2;
         const int TILE_COLS = 4;
-        const string TILE_NAME = "pexesoTile";
-        const string BACK_NAME = "pexesoBack";
 
         // Card drawing support
         const int BOARD_ROWS = 4;
