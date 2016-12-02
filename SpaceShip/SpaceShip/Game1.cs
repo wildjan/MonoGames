@@ -117,9 +117,9 @@ namespace SpaceShip
 
             // DONE: use this.Content to load your game content here
 
-            nebula = Content.Load<Texture2D>(@"images\nebula");
-            debris = Content.Load<Texture2D>(@"images\debris2");
-            splash = Content.Load<Texture2D>(@"images\splash1");
+            nebula = Content.Load<Texture2D>(@"graphics\nebula");
+            debris = Content.Load<Texture2D>(@"graphics\debris2");
+            splash = Content.Load<Texture2D>(@"graphics\splash");
 
             // load background music
             soundtrackEffect = Content.Load<SoundEffect>(@"sounds\soundtrack");
@@ -137,23 +137,23 @@ namespace SpaceShip
             explosionSound = Content.Load<SoundEffect>(@"sounds\explosion");
 
             // define sprites and objects
-            missileSprite = Content.Load<Texture2D>("img/shot3");
-            shipSprite = Content.Load<Texture2D>("img/double_ship");
+            missileSprite = Content.Load<Texture2D>(@"graphics\shot3");
+            shipSprite = Content.Load<Texture2D>(@"graphics\double_ship");
             ship = new Ship(shipSprite, thrustSound, missileSound, shipInfo,
                             new Vector2(
                                 graphics.PreferredBackBufferWidth / 2,
                                 graphics.PreferredBackBufferHeight / 2));
 
-            asteroidSprite0 = Content.Load<Texture2D>(@"images\asteroid_blend");
-            asteroidSprite1 = Content.Load<Texture2D>(@"images\asteroid_blue");
-            asteroidSprite2 = Content.Load<Texture2D>(@"images\asteroid_brown");
-            asteroidSprite3 = Content.Load<Texture2D>(@"images\drTRock");
+            asteroidSprite0 = Content.Load<Texture2D>(@"graphics\asteroid_blend");
+            asteroidSprite1 = Content.Load<Texture2D>(@"graphics\asteroid_blue");
+            asteroidSprite2 = Content.Load<Texture2D>(@"graphics\asteroid_brown");
+            asteroidSprite3 = Content.Load<Texture2D>(@"graphics\drTRock");
             ASTEROID_SPRITES = new Texture2D[] { asteroidSprite0, asteroidSprite1, asteroidSprite2, asteroidSprite3 };
 
-            explosion0 = Content.Load<Texture2D>(@"images\explosion_alpha");
-            explosion1 = Content.Load<Texture2D>(@"images\explosion_blue");
-            explosion2 = Content.Load<Texture2D>(@"images\explosion_blue2");
-            explosion3 = Content.Load<Texture2D>(@"images\explosion_orange");
+            explosion0 = Content.Load<Texture2D>(@"graphics\explosion_alpha");
+            explosion1 = Content.Load<Texture2D>(@"graphics\explosion_blue");
+            explosion2 = Content.Load<Texture2D>(@"graphics\explosion_blue2");
+            explosion3 = Content.Load<Texture2D>(@"graphics\explosion_orange");
             EXPLOSION_TILES = new Texture2D[] { explosion0, explosion1, explosion2, explosion3 };
 
             // load font
@@ -269,7 +269,29 @@ namespace SpaceShip
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            // DONE: Add your drawing code here
+            spriteBatch.Begin();
+
+            // draw the background
+            spriteBatch.Draw(nebula, nebulaRectangle, Color.White);
+            spriteBatch.Draw(debris, debrisRectangle1, Color.White);
+            spriteBatch.Draw(debris, debrisRectangle2, Color.White);
+
+            // draw the ship
+            ship.Draw(spriteBatch);
+
+            // draw sprite groups
+            DrawSpriteGroup(spriteBatch, missileGroup);
+            DrawSpriteGroup(spriteBatch, asteroidGroup);
+            DrawSpriteGroup(spriteBatch, explosionGroup);
+
+            // Draw texts
+            DrawTexts(spriteBatch);
+
+            // draw the splash screen only while waiting for a new game
+            if (!started) spriteBatch.Draw(splash, splashRectangle, Color.White);
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
