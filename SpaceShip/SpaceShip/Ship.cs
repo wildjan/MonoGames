@@ -55,6 +55,8 @@ namespace SpaceShip
             // sets initial values
             this.sprite = sprite;
             this.thrustSound = thrustSound;
+            thrustSound.Play();
+            thrustSound.Pause();
             this.shootSound = shootSound;
             this.position = position;
             size = info.Size;

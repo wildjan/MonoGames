@@ -52,9 +52,9 @@
 /processorParam:TextureFormat=Color
 /build:graphics/paddle.png
 
-#begin sounds/ballbounce.wav
+#begin audio/ballbounce.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:sounds/ballbounce.wav
+/build:audio/ballbounce.wav
 

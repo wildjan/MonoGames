@@ -78,6 +78,13 @@ namespace SpaceShip
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            // change ressolution
+            graphics.PreferredBackBufferWidth = Constants.WINDOW_WIDTH;
+            graphics.PreferredBackBufferHeight = Constants.WINDOW_HEIGHT;
+
+            // set mouse visibility
+            IsMouseVisible = true;
         }
 
         /// <summary>
@@ -90,7 +97,7 @@ namespace SpaceShip
         {
             // DONE: Add your initialization logic here
 
-            // initialize the random genetator
+            // initialize the random generator
             RandomNumberGenerator.Initialize();
 
             // Initialize sprite image info
@@ -126,15 +133,16 @@ namespace SpaceShip
             soundtrack = soundtrackEffect.CreateInstance();
             soundtrack.IsLooped = true;
             soundtrack.Play();
+            soundtrack.Pause();
 
             // load audio content for the thrust sound
-            thrustEffect = Content.Load<SoundEffect>(@"sounds\thrust");
+            thrustEffect = Content.Load<SoundEffect>(@"audio\thrust");
             thrustSound = thrustEffect.CreateInstance();
             thrustSound.IsLooped = true;
 
             // load the other sounds
-            missileSound = Content.Load<SoundEffect>(@"sounds\missile");
-            explosionSound = Content.Load<SoundEffect>(@"sounds\explosion");
+            missileSound = Content.Load<SoundEffect>(@"audio\missile");
+            explosionSound = Content.Load<SoundEffect>(@"audio\explosion");
 
             // define sprites and objects
             missileSprite = Content.Load<Texture2D>(@"graphics\shot3");
@@ -226,8 +234,8 @@ namespace SpaceShip
                     if (lives <= 0)
                     {
                         // the ship is definittely dead - game is over
-                        // clear all, create a new ship and invoke splash
-                        //soundtrackCue.Pause();
+                        // clear all groups, create a new ship and invoke splash
+                        // pause soundtrack
                         asteroidGroup.Clear();
                         missileGroup.Clear();
                         explosionGroup.Clear();
