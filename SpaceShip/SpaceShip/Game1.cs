@@ -129,7 +129,7 @@ namespace SpaceShip
             splash = Content.Load<Texture2D>(@"graphics\splash");
 
             // load background music
-            soundtrackEffect = Content.Load<SoundEffect>(@"sounds\soundtrack");
+            soundtrackEffect = Content.Load<SoundEffect>(@"audio\soundtrack");
             soundtrack = soundtrackEffect.CreateInstance();
             soundtrack.IsLooped = true;
             soundtrack.Play();

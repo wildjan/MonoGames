@@ -206,27 +206,27 @@
 /processorParam:TextureFormat=Color
 /build:images/splash.png
 
-#begin sounds/explosion.wav
+#begin audio/explosion.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:sounds/explosion.wav
+/build:audio/explosion.wav
 
-#begin sounds/missile.wav
+#begin audio/missile.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:sounds/missile.wav
+/build:audio/missile.wav
 
-#begin sounds/soundtrack.wav
+#begin audio/soundtrack.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:sounds/soundtrack.wav
+/build:audio/soundtrack.wav
 
-#begin sounds/thrust.wav
+#begin audio/thrust.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:sounds/thrust.wav
+/build:audio/thrust.wav
 
