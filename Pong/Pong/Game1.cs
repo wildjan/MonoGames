@@ -140,8 +140,6 @@ namespace Pong
                 }
             }
 
-            //padR.Update(gameTime, padPVel);
-
             // update ball
             ball.Update(gameTime);
 
@@ -182,7 +180,7 @@ namespace Pong
                 @"graphics\ball",
                 new Vector2(300, 200),
                 new Vector2(velX, velY),
-                @"sounds\ballbounce");
+                @"audio\ballbounce");
         }
 
         /// <summary>
