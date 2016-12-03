@@ -207,7 +207,7 @@ namespace SpaceShip
                 if (elapsedDelayMilliseconds >= Constants.TOTAL_DELAY_MILLISECONDS
                     && asteroidGroup.Count < Constants.NUM_ASTEROIDS)
                 {
-                    // timer expired and number of asteroids is low, so spawn new asteroid
+                    // timer expired and number of asteroids is low, so spawn a new asteroid
                     SpawnAsteroid(ship.Position);
 
                     // restart timer

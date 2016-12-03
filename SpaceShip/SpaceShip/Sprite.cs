@@ -40,13 +40,13 @@ namespace SpaceShip
         #region Constructors
 
         /// <summary>
-        ///  Constructs a sprite centered on the given x and y with the
+        ///  Constructs a sprite (asteroid, missile and explosion) centered on the given x and y with the
         ///  given velocity and angle velocity and sprite image info
         /// </summary>
-        /// <param name="sprite">the name of the sprite for the asteroid</param>
-        /// <param name="position">the vector location of the center of the asteroid</param>
-        /// <param name="velocity">the vector of velocity of the asteroid</param>
-        /// <param name="angleVelocity">the angle velocity of the asteroid</param>
+        /// <param name="sprite">the name of the sprite</param>
+        /// <param name="position">the vector location of the center of the sprite</param>
+        /// <param name="velocity">the vector of velocity of the sprite</param>
+        /// <param name="angleVelocity">the angle velocity of the sprite</param>
         /// <param name="info">sprite image info</param>
         public Sprite(Texture2D sprite,Vector2 position, Vector2 velocity, float angle, float angleVelocity, ImageInfo info)
         {
@@ -71,7 +71,7 @@ namespace SpaceShip
         #region Properties
 
         /// <summary>
-        /// Gets and sets whether or not the asteroid is active
+        /// Gets and sets whether or not the sprite is active
         /// </summary>
         public bool Active
         {
@@ -80,7 +80,7 @@ namespace SpaceShip
         }
 
         /// <summary>
-        /// Gets the position of the asteroid
+        /// Gets the position of the sprite
         /// </summary>
         public Vector2 Position
         {
@@ -88,7 +88,7 @@ namespace SpaceShip
         }
 
         /// <summary>
-        /// Gets the radius od the asteroid
+        /// Gets the radius od the sprite
         /// </summary>
         public int Radius
         {
@@ -100,7 +100,7 @@ namespace SpaceShip
         #region Public methods
 
         /// <summary>
-        /// Updates the asteroid's position.
+        /// Updates the sprite's position.
         /// </summary>
         /// <param name="gameTime">game time</param>
         public void Update(GameTime gameTime)
@@ -132,11 +132,12 @@ namespace SpaceShip
         }
 
         /// <summary>
-        /// Draws the asteroid
+        /// Draws the sprite
         /// </summary>
         /// <param name="spriteBatch">the sprite batch to use</param>
         public void Draw(SpriteBatch spriteBatch)
         {
+            // if the sprite is animated draw one phase based on the age
             if (animated)
             {
                 sourceRectangle.X = age % dimensions.Y * size.X;
