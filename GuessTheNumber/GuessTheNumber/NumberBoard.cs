@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace OptionalProject
+namespace GuessTheNumber
 {
     /// <remarks>
     /// The board of number tiles to guess

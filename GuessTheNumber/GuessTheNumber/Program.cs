@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OptionalProject
+namespace GuessTheNumber
 {
 #if WINDOWS || LINUX
     /// <summary>

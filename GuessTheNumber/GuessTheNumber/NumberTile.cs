@@ -7,12 +7,12 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace OptionalProject
+namespace GuessTheNumber
 {
     /// <remarks>
     /// A number tile
     /// </remarks>
-    class NumberTile
+    public class NumberTile
     {
         #region Fields
 
@@ -35,13 +35,13 @@ namespace OptionalProject
 
         // blinking support
         const int TotalBlinkMilliseconds = 4000;
-        int elapsedBlinkMilliseconds = 0;
+        Timer blinkingTimer = new Timer(TotalBlinkMilliseconds);
         const int FrameBlinkMilliseconds = 1000;
-        int elapsedFrameMilliseconds = 0;
+        Timer frameBlinkingTimer = new Timer(FrameBlinkMilliseconds);
 
         // Increment 4: fields for shrinking support
         const int TotalShrinkMilliseconds = 1000;
-        int elapsedShrinkMilliseconds = 0;
+        Timer shrinkingTimer = new Timer(TotalShrinkMilliseconds);
 
         // Increment 4: fields to keep track of visible, blinking, and shrinking
         bool isBlinking = false;
@@ -78,6 +78,11 @@ namespace OptionalProject
             drawRectangle = new Rectangle((int)center.X - sideLength / 2,
                  (int)center.Y - sideLength / 2, sideLength, sideLength);
 
+            // start timers
+            blinkingTimer.Start();
+            shrinkingTimer.Start();
+            frameBlinkingTimer.Start();
+
             // set isCorrectNumber flag
             isCorrectNumber = number == correctNumber;
 
@@ -102,20 +107,20 @@ namespace OptionalProject
             // Increments 4 and 5: add code for shrinking and blinking support
             if (isBlinking)
             {
-                elapsedBlinkMilliseconds += gameTime.ElapsedGameTime.Milliseconds;
+                blinkingTimer.Update(gameTime);
 
                 // test if overall blinking is over
-                if (elapsedBlinkMilliseconds > TotalBlinkMilliseconds)
+                if (!blinkingTimer.IsRunning)
                 {
                     // game is over
                     return true;
                 }
                 else
                 {
-                    elapsedFrameMilliseconds += gameTime.ElapsedGameTime.Milliseconds;
+                    frameBlinkingTimer.Update(gameTime);
 
                     // test if blinking frame is over
-                    if (elapsedFrameMilliseconds > FrameBlinkMilliseconds)
+                    if (!frameBlinkingTimer.IsRunning)
                     {
                         // move the source rectangle left or right
                         if (sourceRectangle.X == 0)
@@ -127,15 +132,15 @@ namespace OptionalProject
                             sourceRectangle.X = 0;
                         }
 
-                        elapsedFrameMilliseconds = 0;
+                        frameBlinkingTimer.Start();
                     }
                 }
             }
 
             else if (isShrinking)
             {
-                elapsedShrinkMilliseconds += gameTime.ElapsedGameTime.Milliseconds;
-                float ratio = 1 - (float)elapsedShrinkMilliseconds / TotalShrinkMilliseconds;
+                shrinkingTimer.Update(gameTime);
+                float ratio = 1 - (float) shrinkingTimer.ElapsedMilliseconds / TotalShrinkMilliseconds;
                 int sideLenght = (int)(originalSideLength * ratio);
 
                 // check if shrinking is over

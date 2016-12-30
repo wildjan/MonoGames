@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 
-namespace OptionalProject
+namespace GuessTheNumber
 {
     /// <summary>
     /// This is the main type for your game.
