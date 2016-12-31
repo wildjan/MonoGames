@@ -44,7 +44,7 @@ namespace GuessTheNumber
         /// <param name="sideLength">the side length for the board</param>
         /// <param name="correctNumber">the correct number</param>
         public NumberBoard(ContentManager contentManager, Vector2 center, int sideLength, 
-            int correctNumber)
+            int correctNumber, CorrectGuessEventHandler handleCorrectGuessEvent)
         {
             // Increment 2: load content for the board and create draw rectangle
             LoadContent(contentManager);
@@ -61,7 +61,7 @@ namespace GuessTheNumber
                 for (int j = 0; j < NumColumns; j++)
                 {
                     tiles[i, j] = new NumberTile(contentManager, CalculateTileCenter(i, j),
-                        tileSideLength, i * NumColumns + j + 1, correctNumber);
+                        tileSideLength, i * NumColumns + j + 1, correctNumber, handleCorrectGuessEvent);
                 }
             }
         }
@@ -78,21 +78,13 @@ namespace GuessTheNumber
         /// <param name="gameTime">the current GameTime</param>
         /// <param name="mouse">the current mouse state</param>
         /// <return>true if the correct number was guessed, false otherwise</return>
-        public bool Update(GameTime gameTime, MouseState mouse)
+        public void Update(GameTime gameTime, MouseState mouse)
         {
             // Increment 4: update all the number tiles
             foreach (NumberTile tile in tiles)
             {
-                if (tile.Update(gameTime, mouse))
-                {
-                    return true;
-                }
+                tile.Update(gameTime, mouse);
             }
-
-            // Increment 5: return appropriate cvalue for correct tile guessed
-
-            // return false because the correct number wasn't guessed
-            return false;
         }
 
         /// <summary>

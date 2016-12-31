@@ -36,7 +36,7 @@ namespace GuessTheNumber
         // blinking support
         const int TotalBlinkMilliseconds = 4000;
         Timer blinkingTimer = new Timer(TotalBlinkMilliseconds);
-        const int FrameBlinkMilliseconds = 1000;
+        const int FrameBlinkMilliseconds = 500;
         Timer frameBlinkingTimer = new Timer(FrameBlinkMilliseconds);
 
         // Increment 4: fields for shrinking support
@@ -55,6 +55,9 @@ namespace GuessTheNumber
         // Increment 5: sound effect field
         SoundEffect soundEffect;
 
+        // events triggered by the class
+        CorrectGuessEvent correctGuessEvent = new CorrectGuessEvent();
+
         #endregion
 
         #region Constructors
@@ -68,10 +71,13 @@ namespace GuessTheNumber
         /// <param name="number">the number for the tile</param>
         /// <param name="correctNumber">the correct number</param>
         public NumberTile(ContentManager contentManager, Vector2 center, int sideLength,
-            int number, int correctNumber)
+            int number, int correctNumber, CorrectGuessEventHandler handleCorrectGuessEvent)
         {
             // set original side length field
             this.originalSideLength = sideLength;
+
+            // register the given event handler
+            RegisterEventHandler(handleCorrectGuessEvent);
 
             // load content for the tile and create draw rectangle
             LoadContent(contentManager, number);
@@ -102,7 +108,7 @@ namespace GuessTheNumber
         /// <param name="gameTime">the current GameTime</param>
         /// <param name="mouse">the current mouse state</param>
         /// <return>true if the correct number was guessed, false otherwise</return>
-        public bool Update(GameTime gameTime, MouseState mouse)
+        public void Update(GameTime gameTime, MouseState mouse)
         {
             // Increments 4 and 5: add code for shrinking and blinking support
             if (isBlinking)
@@ -113,7 +119,7 @@ namespace GuessTheNumber
                 if (!blinkingTimer.IsRunning)
                 {
                     // game is over
-                    return true;
+                    OnCorrectGuessEvent(this);
                 }
                 else
                 {
@@ -200,8 +206,6 @@ namespace GuessTheNumber
                 }
             }
 
-            // if we get here, return false
-            return false;
         }
 
         /// <summary>
@@ -272,7 +276,24 @@ namespace GuessTheNumber
                 default:
                     throw new Exception("Unsupported number for number tile");
             }
+        }
 
+        /// <summary>
+        /// Registers the given event handler
+        /// </summary>
+        /// <param name="handler">the event handler</param>
+        private void RegisterEventHandler(CorrectGuessEventHandler handler)
+        {
+            correctGuessEvent.Register(handler);
+        }
+
+        /// <summary>
+        /// Trigger the correct guess event for the tile
+        /// </summary>
+        /// <param name="numberTile"></param>
+        private void OnCorrectGuessEvent(NumberTile numberTile)
+        {
+            correctGuessEvent.OnCorrectGuessEvent(numberTile);
         }
 
         #endregion

@@ -105,16 +105,7 @@ namespace GuessTheNumber
             if (gameState == GameState.Play)
             {
                 MouseState mouse = Mouse.GetState();
-                bool guessedCorectNumber = numberBoard.Update(gameTime, mouse);
-
-                // Increment 5: check for correct guess
-                if (guessedCorectNumber)
-                {
-                    //gameState = GameState.Menu;
-                    //soundBank.PlayCue("newGame");
-                    StartGame();
-                }
-
+                numberBoard.Update(gameTime, mouse);
             }
 
             base.Update(gameTime);
@@ -144,6 +135,8 @@ namespace GuessTheNumber
             base.Draw(gameTime);
         }
 
+        #region Private methods
+
         /// <summary>
         /// Starts a game
         /// </summary>
@@ -156,8 +149,19 @@ namespace GuessTheNumber
             Vector2 center = new Vector2(graphics.PreferredBackBufferWidth / 2,
                 graphics.PreferredBackBufferHeight / 2);
                 int size = (int)(graphics.PreferredBackBufferHeight * 0.9f);
-            numberBoard = new NumberBoard(Content, center, size, correctNumber);
+            numberBoard = new NumberBoard(Content, center, size, correctNumber, HandleCorrectGuessEvent);
             newGameSound.Play();
         }
+
+        #endregion
+
+        #region Event handlers
+
+        private void HandleCorrectGuessEvent(NumberTile numberTile)
+        {
+            StartGame();
+        }
+
+        #endregion
     }
 }
