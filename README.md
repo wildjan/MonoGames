@@ -11,7 +11,7 @@ Pong- a simple TV game (controls W/S and UP/DOWN paddles movement)
 Snake- implemantation of the famous game Nibbles (not finished)
 SpaceShip- shooting asteroids (controls LEFT/RIGHT- rotation of the ship, UP- thrust, SPACE- shooting)
 
-DON'T FORGET: I am still the biginner- code is not perfect!
+DON'T FORGET: I am still the beginner- code is not perfect!
 
 Maybe you should change projects property 'Target framework" to convenient .NET framework.
 
