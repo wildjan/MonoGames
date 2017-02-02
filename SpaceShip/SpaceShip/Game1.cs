@@ -155,8 +155,7 @@ namespace SpaceShip
             asteroidSprite0 = Content.Load<Texture2D>(@"graphics\asteroid_blend");
             asteroidSprite1 = Content.Load<Texture2D>(@"graphics\asteroid_blue");
             asteroidSprite2 = Content.Load<Texture2D>(@"graphics\asteroid_brown");
-            asteroidSprite3 = Content.Load<Texture2D>(@"graphics\drTRock");
-            ASTEROID_SPRITES = new Texture2D[] { asteroidSprite0, asteroidSprite1, asteroidSprite2, asteroidSprite3 };
+            ASTEROID_SPRITES = new Texture2D[] { asteroidSprite0, asteroidSprite1, asteroidSprite2};
 
             explosion0 = Content.Load<Texture2D>(@"graphics\explosion_alpha");
             explosion1 = Content.Load<Texture2D>(@"graphics\explosion_blue");
@@ -341,7 +340,7 @@ namespace SpaceShip
         private void SpawnAsteroid(Vector2 shipPos)
         {
             // generate random sprite, position, velocity and velocity of rotation
-            int idx = RandomNumberGenerator.Next(4);
+            int idx = RandomNumberGenerator.Next(3);
             Texture2D asteroidSprite = ASTEROID_SPRITES[idx];
             Vector2 pos = shipPos;
 
